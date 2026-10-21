@@ -29,6 +29,7 @@ export default function ContactForm() {
   const [values, setValues] = useState<Fields>(empty)
   const [errors, setErrors] = useState<Errors>({})
   const [status, setStatus] = useState<Status>('idle')
+  const [honeypot, setHoneypot] = useState('') // spam trap: real visitors never see or fill this
   const statusRef = useRef<HTMLDivElement>(null)
 
   const set = (k: keyof Fields) => (e: { target: { value: string } }) => {
@@ -51,7 +52,7 @@ export default function ContactForm() {
     }
     setStatus('submitting')
     try {
-      const res = await submitContact(values)
+      const res = await submitContact(values, honeypot)
       setStatus(res.mode === 'sent' ? 'success' : 'mock')
       setValues(empty)
     } catch {
@@ -76,7 +77,12 @@ export default function ContactForm() {
   const busy = status === 'submitting'
 
   return (
-    <form onSubmit={onSubmit} noValidate aria-busy={busy} className="space-y-5" netlify>
+    <form onSubmit={onSubmit} noValidate aria-busy={busy} name="contact" method="POST" className="space-y-5">
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden" aria-hidden="true">
+        <label>Do not fill this in: <input name="bot-field" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} /></label>
+      </p>
+
       <div ref={statusRef} tabIndex={-1} aria-live="polite" className="outline-none">
         <AnimatePresence mode="wait">
           {status === 'success' && (
