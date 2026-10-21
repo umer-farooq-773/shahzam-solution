@@ -20,12 +20,6 @@ export const siteConfig = {
     linkedin: import.meta.env.VITE_SOCIAL_LINKEDIN ?? '',
     facebook: import.meta.env.VITE_SOCIAL_FACEBOOK ?? '',
   },
-  /**
-   * Contact form endpoint. When empty, the form runs a clearly-labelled MOCK
-   * submission (nothing is sent). Set VITE_CONTACT_ENDPOINT to a real URL that
-   * accepts a JSON POST to go live. See src/lib/submitContact.ts.
-   */
-  contactEndpoint: import.meta.env.VITE_CONTACT_ENDPOINT ?? '',
 } as const
 
 export const img = {

@@ -19,6 +19,7 @@ Requires Node 20+ (developed on Node 22).
 Contact details and social links are **empty by default**; the UI shows "Details coming soon" until you set them. Copy `.env.example` to `.env` and fill in what you have:
 
 ```
+VITE_SITE_URL=
 VITE_CONTACT_EMAIL=
 VITE_CONTACT_PHONE=
 VITE_CONTACT_LOCATION=
@@ -26,16 +27,15 @@ VITE_SOCIAL_GITHUB=
 VITE_SOCIAL_X=
 VITE_SOCIAL_LINKEDIN=
 VITE_SOCIAL_FACEBOOK=
-VITE_CONTACT_ENDPOINT=
 ```
 
 Social icons only appear for URLs you set.
 
-## Contact form → real backend
+## Contact form → Netlify Forms
 
-The form is fully working on the front end (validation, loading, success, error states). With no endpoint configured it runs a **mock submission and tells the visitor "Demo mode — your message was not sent."** Nothing is delivered and it never claims otherwise.
+In production, the contact form submits URL-encoded data to Netlify Forms. Netlify detects the form definition in `public/__forms.html`; the React form and submission use the matching `contact` name and `bot-field` spam honeypot. In local development (`npm run dev`), submissions are mocked because Netlify Forms only processes them on a deployed Netlify site.
 
-To go live, set `VITE_CONTACT_ENDPOINT` to a URL that accepts a JSON `POST` (e.g. a Laravel route that sends mail). The payload is `{ name, email, company, service, budget, message }`. The only integration point is `src/lib/submitContact.ts`. Non-2xx responses or network errors show the failure state.
+Configure form detection and an owner notification for the form named `contact` in the Netlify dashboard. The site does not send visitor confirmation emails.
 
 ## Content you should replace
 

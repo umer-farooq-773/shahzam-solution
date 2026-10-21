@@ -2,7 +2,7 @@ import { useRef, useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AlertTriangle, CheckCircle2, Info, Loader2, Send } from 'lucide-react'
 import { services } from '@/data/services'
-import { submitContact, type ContactPayload } from '@/lib/submitContact'
+import { NETLIFY_FORM_NAME, submitContact, type ContactPayload } from '@/lib/submitContact'
 import { PrimaryButton } from './Buttons'
 
 type Fields = ContactPayload
@@ -54,7 +54,11 @@ export default function ContactForm() {
     try {
       const res = await submitContact(values, honeypot)
       setStatus(res.mode === 'sent' ? 'success' : 'mock')
-      setValues(empty)
+      if (res.mode === 'sent') {
+        setValues(empty)
+        setHoneypot('')
+        setErrors({})
+      }
     } catch {
       setStatus('error')
     }
@@ -77,8 +81,8 @@ export default function ContactForm() {
   const busy = status === 'submitting'
 
   return (
-    <form onSubmit={onSubmit} noValidate aria-busy={busy} name="contact" method="POST" className="space-y-5">
-      <input type="hidden" name="form-name" value="contact" />
+    <form onSubmit={onSubmit} noValidate aria-busy={busy} name={NETLIFY_FORM_NAME} method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5">
+      <input type="hidden" name="form-name" value={NETLIFY_FORM_NAME} />
       <p className="hidden" aria-hidden="true">
         <label>Do not fill this in: <input name="bot-field" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} /></label>
       </p>
@@ -94,7 +98,7 @@ export default function ContactForm() {
           {status === 'mock' && (
             <motion.div key="m" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} role="status" className="flex gap-3 rounded-xl border border-sky/40 bg-sky/10 p-4 text-sm text-sky-100">
               <Info className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
-              <p><strong className="block">Demo mode — your message was not sent.</strong>The form works, but no contact endpoint is configured yet, so nothing was delivered. See the README to connect a real endpoint.</p>
+              <p><strong className="block">Demo mode — your message was not sent.</strong>Netlify Forms only processes submissions on the deployed site, so nothing was delivered.</p>
             </motion.div>
           )}
           {status === 'error' && (

@@ -9,7 +9,6 @@ interface ImportMetaEnv {
   readonly VITE_SOCIAL_X?: string
   readonly VITE_SOCIAL_LINKEDIN?: string
   readonly VITE_SOCIAL_FACEBOOK?: string
-  readonly VITE_CONTACT_ENDPOINT?: string
 }
 interface ImportMeta {
   readonly env: ImportMetaEnv
