@@ -76,7 +76,7 @@ export default function ContactForm() {
   const busy = status === 'submitting'
 
   return (
-    <form onSubmit={onSubmit} noValidate aria-busy={busy} className="space-y-5">
+    <form onSubmit={onSubmit} noValidate aria-busy={busy} className="space-y-5" netlify>
       <div ref={statusRef} tabIndex={-1} aria-live="polite" className="outline-none">
         <AnimatePresence mode="wait">
           {status === 'success' && (
