@@ -1,0 +1,5 @@
+# Netlify Redirects for SPA routing
+# This ensures all routes serve index.html for client-side routing
+# The 200 status code creates a rewrite (not a redirect), preserving the URL
+
+/*    /index.html   200
