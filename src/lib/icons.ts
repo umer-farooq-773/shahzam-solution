@@ -1,6 +1,6 @@
 import {
   siReact, siLaravel, siTypescript, siJavascript, siTailwindcss, siPhp, siPython, siDocker,
-  siLinux, siGithubactions, siMysql, siPostgresql, siRedis, siGithub, siX, siFacebook,
+  siLinux, siGithubactions, siMysql, siPostgresql, siRedis, siGithub, siX, siFacebook, siInstagram,
 } from 'simple-icons'
 
 export interface SimpleIcon { path: string; hex: string; title: string }
@@ -11,5 +11,5 @@ export interface SimpleIcon { path: string; hex: string; title: string }
  */
 export const simpleIcons: Record<string, SimpleIcon> = {
   siReact, siLaravel, siTypescript, siJavascript, siTailwindcss, siPhp, siPython, siDocker,
-  siLinux, siGithubactions, siMysql, siPostgresql, siRedis, siGithub, siX, siFacebook,
+  siLinux, siGithubactions, siMysql, siPostgresql, siRedis, siGithub, siX, siFacebook, siInstagram,
 }
