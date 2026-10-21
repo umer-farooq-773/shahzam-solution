@@ -16,10 +16,9 @@ Requires Node 20+ (developed on Node 22).
 
 ## Configure contact details (nothing is invented)
 
-Site URL, contact details and social links are **empty by default**; the UI shows "Details coming soon" until you set them. Copy `.env.example` to `.env` and fill in what you have:
+Contact details and social links are **empty by default**; the UI shows "Details coming soon" until you set them. Copy `.env.example` to `.env` and fill in what you have:
 
 ```
-VITE_SITE_URL=
 VITE_CONTACT_EMAIL=
 VITE_CONTACT_PHONE=
 VITE_CONTACT_LOCATION=
