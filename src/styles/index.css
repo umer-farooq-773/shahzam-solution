@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #07111f;
+  --color-bg-2: #0b1422;
+  --color-card: #111c2d;
+  --color-elevated: #162338;
+  --color-gold: #ffb000;
+  --color-gold-2: #ffc247;
+  --color-ink: #f5f7fa;
+  --color-muted: #a8b3c5;
+  --color-sky: #21b8ff;
+  --color-line: rgba(255, 176, 0, 0.18);
+  /* Semantic tokens added for theming. Dark values reproduce the original design exactly. */
+  --color-accent: #ffb000;       /* gold used as TEXT (darker in light mode for contrast) */
+  --color-accent-2: #ffc247;     /* secondary gold used as TEXT / links */
+  --color-gold-hi: #ffc247;      /* top stop of the primary-button gradient */
+  --color-on-accent: #07111f;    /* text/icons placed on gold or coloured fills */
+  --color-tint: #ffffff;         /* neutral overlay tint (white on dark, navy on light) */
+  --color-field: rgba(255, 176, 0, 0.18); /* form-control border */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+  --shadow-gold: 0 0 40px -12px rgba(255, 176, 0, 0.35);
+}
+
+/* ------------------------------------------------------------------ */
+/* Theme variables. Dark is the default and matches the original site. */
+/* ------------------------------------------------------------------ */
+:root {
+  --color-focus: #ffb000;
+  --glass-from: rgba(22, 35, 56, 0.72);
+  --glass-to: rgba(17, 28, 45, 0.72);
+  --grid-line: rgba(255, 176, 0, 0.05);
+  --gold-grad-1: #ffb000;
+  --gold-grad-2: #ffc247;
+  --gold-grad-3: #ffd98a;
+  --sweep: rgba(255, 194, 71, 0.16);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #f8fafc;
+  --color-bg-2: #ffffff;
+  --color-card: #ffffff;
+  --color-elevated: #f1f5f9;
+  --color-gold: #d99a00;
+  --color-gold-2: #b98100;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-line: #e2e8f0;
+  --color-accent: #8f6100;
+  --color-accent-2: #7a5200;
+  --color-gold-hi: #e6a817;
+  --color-tint: #0f172a;
+  --color-field: #94a3b8;
+  --shadow-soft: 0 20px 50px -24px rgba(15, 23, 42, 0.28);
+  --shadow-gold: 0 0 40px -12px rgba(217, 154, 0, 0.3);
+
+  --color-focus: #8f6100;
+  --glass-from: rgba(255, 255, 255, 0.92);
+  --glass-to: rgba(255, 255, 255, 0.92);
+  --grid-line: rgba(15, 23, 42, 0.06);
+  --gold-grad-1: #9a6a00;
+  --gold-grad-2: #c48a00;
+  --gold-grad-3: #d99a00;
+  --sweep: rgba(217, 154, 0, 0.14);
+
+  /* Status colours used by the contact form, re-mapped for light surfaces. */
+  --color-red-300: #b91c1c;
+  --color-red-100: #991b1b;
+  --color-emerald-100: #065f46;
+  --color-sky-100: #075985;
+}
+
+html { scroll-behavior: smooth; background: var(--color-bg); }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+img { max-width: 100%; }
+
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: 6px; }
+
+.container-x { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1.25rem; }
+@media (min-width: 640px) { .container-x { padding-inline: 2rem; } }
+
+.glass {
+  background: linear-gradient(180deg, var(--glass-from), var(--glass-to));
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.text-gold-gradient {
+  background: linear-gradient(120deg, var(--gold-grad-1) 0%, var(--gold-grad-2) 60%, var(--gold-grad-3) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+.sweep { position: relative; overflow: hidden; }
+.sweep::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(110deg, transparent 35%, var(--sweep) 50%, transparent 65%);
+  transition: transform 0.9s ease; pointer-events: none;
+}
+.sweep:hover::after { transform: translateX(120%); }
+
+.prose-article p { color: var(--color-muted); line-height: 1.85; margin: 0 0 1.25rem; font-size: 1.0625rem; }
+.prose-article h2 { font-size: 1.5rem; font-weight: 700; margin: 2.25rem 0 0.75rem; }
+.prose-article ul { color: var(--color-muted); margin: 0 0 1.25rem 1.25rem; list-style: disc; line-height: 1.8; }
+.prose-article code { background: var(--color-elevated); padding: 0.1rem 0.4rem; border-radius: 4px; color: var(--color-accent-2); font-size: 0.9em; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* About page: slow orbit of technology tiles (counter-rotated so icons stay upright) */
+@keyframes eco-spin { to { transform: rotate(360deg); } }
+@keyframes eco-unspin { to { transform: rotate(-360deg); } }
+.eco-orbit { animation: eco-spin 70s linear infinite; }
+.eco-counter { animation: eco-unspin 70s linear infinite; }
+
+/* Light mode: gentle elevation so white cards separate from the page background. */
+:root[data-theme="light"] .glass { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -16px rgba(15, 23, 42, 0.12); }
+
+/* Navbar theme toggle: cross-fading, rotating icons. Reduced-motion is handled by the global rule above. */
+.theme-icon { transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.theme-icon[data-active="false"] { opacity: 0; transform: rotate(-70deg) scale(0.5); }
+.theme-icon[data-active="true"] { opacity: 1; transform: rotate(0) scale(1); }
+
+/* Horizontal logo ships as a white-on-transparent PNG. In light mode it is recoloured with a
+   filter (no asset change) so the wordmark reads dark and the gold accents are preserved. */
+:root[data-theme="light"] .logo-adaptive { filter: invert(1) hue-rotate(180deg) saturate(1.6) brightness(1.9); }

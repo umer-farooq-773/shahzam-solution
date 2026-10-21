@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/logo-stacked-color.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111F" />
+    <script>
+      /* Apply the saved theme before first paint to avoid a flash of the wrong theme. Dark is the default. */
+      (function () {
+        try {
+          var t = localStorage.getItem('shahzam-theme');
+          if (t !== 'light' && t !== 'dark') t = 'dark';
+          document.documentElement.setAttribute('data-theme', t);
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', t === 'light' ? '#F8FAFC' : '#07111F');
+        } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+      })();
+    </script>
+    <title>Shahzam Solution — Build. Deploy. Grow.</title>
+    <meta name="description" content="Shahzam Solution is a software development company building web apps, mobile apps, custom software, cloud infrastructure, APIs and DevOps pipelines." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shahzam Solution" />
+    <meta property="og:title" content="Shahzam Solution — Build. Deploy. Grow." />
+    <meta property="og:description" content="Modern web applications with React, Laravel, TypeScript, Python, AWS and DevOps." />
+    <meta property="og:image" content="/images/full_stack_hero.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
