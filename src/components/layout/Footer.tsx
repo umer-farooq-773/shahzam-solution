@@ -11,11 +11,11 @@ export default function Footer() {
   const col = 'text-sm font-bold uppercase tracking-widest text-ink'
   const link = 'text-sm text-muted transition-colors hover:text-accent-2'
 
-  // Show only Instagram and Facebook
+  // Show only Instagram and Facebook - always display both icons
   const socialLinks = [
-    { key: 'instagram', url: social.instagram, label: 'Instagram' },
-    { key: 'facebook', url: social.facebook, label: 'Facebook' },
-  ].filter(s => s.url)
+    { key: 'instagram', url: social.instagram || '#', label: 'Instagram' },
+    { key: 'facebook', url: social.facebook || '#', label: 'Facebook' },
+  ]
 
   return (
     <footer className="relative mt-24 border-t border-line bg-bg-2">
@@ -25,22 +25,19 @@ export default function Footer() {
             Smart solutions for a digital tomorrow. We build web, mobile and cloud software that is fast, secure and built to last.
           </p>
           <div className="mt-6 flex gap-3">
-            {socialLinks.length > 0 ? (
-              socialLinks.map((s) => (
-                <a 
-                  key={s.key} 
-                  href={s.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  aria-label={`Shahzam Solution on ${s.label}`} 
-                  className="grid size-11 place-items-center rounded-lg border border-line bg-tint/5 text-muted transition hover:border-gold/60 hover:bg-gold/10 hover:text-accent"
-                >
-                  <SocialIcon name={s.key} />
-                </a>
-              ))
-            ) : (
-              <p className="text-xs text-muted/80">Follow us on social media</p>
-            )}
+            {socialLinks.map((s) => (
+              <a 
+                key={s.key} 
+                href={s.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label={`Shahzam Solution on ${s.label}`} 
+                className="grid size-11 place-items-center rounded-lg border border-line bg-tint/5 text-muted transition hover:border-gold/60 hover:bg-gold/10 hover:text-accent"
+                onClick={s.url === '#' ? (e) => e.preventDefault() : undefined}
+              >
+                <SocialIcon name={s.key} />
+              </a>
+            ))}
           </div>
         </div>
 
