@@ -8,10 +8,11 @@ const paths: Record<string, string | undefined> = {
   github: s.siGithub?.path,
   x: s.siX?.path,
   facebook: s.siFacebook?.path,
+  instagram: s.siInstagram?.path,
   linkedin: LINKEDIN,
 }
 
-export const socialLabels: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', facebook: 'Facebook' }
+export const socialLabels: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', facebook: 'Facebook', instagram: 'Instagram' }
 
 export default function SocialIcon({ name, size = 18 }: { name: string; size?: number }) {
   const d = paths[name]

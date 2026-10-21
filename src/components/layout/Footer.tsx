@@ -1,36 +1,45 @@
 import { Link } from 'react-router-dom'
 import { Mail, MapPin, Phone } from 'lucide-react'
-import { img, navLinks, siteConfig } from '@/lib/site'
+import { navLinks, siteConfig } from '@/lib/site'
 import { services } from '@/data/services'
-import SocialIcon, { socialLabels } from '@/components/ui/SocialIcon'
+import SocialIcon from '@/components/ui/SocialIcon'
 
 const soon = 'Details coming soon'
 
 export default function Footer() {
   const { contact, social } = siteConfig
-  const socials = Object.entries(social).filter(([, url]) => url)
   const col = 'text-sm font-bold uppercase tracking-widest text-ink'
   const link = 'text-sm text-muted transition-colors hover:text-accent-2'
 
+  // Show only Instagram and Facebook
+  const socialLinks = [
+    { key: 'instagram', url: social.instagram, label: 'Instagram' },
+    { key: 'facebook', url: social.facebook, label: 'Facebook' },
+  ].filter(s => s.url)
+
   return (
     <footer className="relative mt-24 border-t border-line bg-bg-2">
-      <div className="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.2fr]">
+      <div className="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.2fr_1.2fr]">
         <div>
-          <Link to="/" aria-label="Shahzam Solution — home">
-            <img src={img.logoHorizontal} alt="Shahzam Solution" width={739} height={260} loading="lazy" className="logo-adaptive h-14 w-auto" />
-          </Link>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+          <p className="max-w-xs text-sm leading-relaxed text-muted">
             Smart solutions for a digital tomorrow. We build web, mobile and cloud software that is fast, secure and built to last.
           </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {socials.length > 0 ? (
-              socials.map(([k, url]) => (
-                <a key={k} href={url} target="_blank" rel="noopener noreferrer" aria-label={`Shahzam Solution on ${socialLabels[k]}`} className="grid size-10 place-items-center rounded-lg border border-line text-muted transition hover:border-gold/60 hover:text-accent">
-                  <SocialIcon name={k} />
+          <div className="mt-6 flex gap-3">
+            {socialLinks.length > 0 ? (
+              socialLinks.map((s) => (
+                <a 
+                  key={s.key} 
+                  href={s.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label={`Shahzam Solution on ${s.label}`} 
+                  className="grid size-11 place-items-center rounded-lg border border-line bg-tint/5 text-muted transition hover:border-gold/60 hover:bg-gold/10 hover:text-accent"
+                >
+                  <SocialIcon name={s.key} />
                 </a>
               ))
             ) : (
-              <p className="text-xs text-muted/80">Social links will appear here once configured.</p>
+              <p className="text-xs text-muted/80">Follow us on social media</p>
             )}
           </div>
         </div>

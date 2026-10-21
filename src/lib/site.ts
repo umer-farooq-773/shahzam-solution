@@ -19,6 +19,7 @@ export const siteConfig = {
     x: import.meta.env.VITE_SOCIAL_X ?? '',
     linkedin: import.meta.env.VITE_SOCIAL_LINKEDIN ?? '',
     facebook: import.meta.env.VITE_SOCIAL_FACEBOOK ?? '',
+    instagram: import.meta.env.VITE_SOCIAL_INSTAGRAM ?? '',
   },
 } as const
 
